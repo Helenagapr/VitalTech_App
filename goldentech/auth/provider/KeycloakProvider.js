@@ -20,7 +20,7 @@ export const KeycloakProvider = ({ children }) => {
           setAuthenticated(auth);
           if (keycloak && auth) {
             setUser({
-              name: keycloak.tokenParsed?.preferred_username,
+              name: keycloak.tokenParsed?.username,
               email: keycloak.tokenParsed?.email,
             });
           }
