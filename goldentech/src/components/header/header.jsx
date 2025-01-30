@@ -29,8 +29,8 @@ export default function Header() {
           <span  className={router.pathname === '/medicacion' ? 'active' : ''}>Medicación</span>
           </Link>
           <span>Perfil</span>
-        </nav>
-        <LogoutButton/>     
+          <LogoutButton/>
+        </nav>     
       </header>
     );
   }
