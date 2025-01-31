@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 
 const MedicacionList = [
-    { medicamento: "Ibuprofeno", dosis: "1 cada 6h", caducidadPrescripcion: "29-12-2027", doctorRecetado: "Juan Luis Lopez" }
+    { key: 1, medicamento: "Ibuprofeno", dosis: "1 cada 6h", caducidadPrescripcion: "29-12-2027", doctorRecetado: "Juan Luis Lopez" }
 ];
 
 function MedicacionRow({medicacion, onSelect, isSelected}){
@@ -49,7 +49,7 @@ function ListaMedicacion({medicaciones, onSelect, selectedMedicacion}){
     
     medicaciones.forEach((medicacion) => {
         rows.push(
-            <MedicacionRow medicacion={medicacion} key={medicacion.motivo} onSelect={onSelect} isSelected={selectedMedicacion === medicacion}/>
+            <MedicacionRow medicacion={medicacion} key={medicacion.key} onSelect={onSelect} isSelected={selectedMedicacion === medicacion}/>
         )
     })
     return(

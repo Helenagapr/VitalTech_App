@@ -528,3 +528,16 @@
   flex-direction: column;
   margin-left: 300px;
 }
+
+.logout-button {
+  margin-left: auto;
+  background-color: #3b83bd;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  width: 100px;
+  height: 30px;
+  align-self: flex-end;
+  font-size: 0.8em;
+  cursor: pointer;
+}

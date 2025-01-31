@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import LogoutButton from '../logout/LogoutButton';
 
 export default function Header() {
   const router = useRouter();
@@ -28,7 +29,8 @@ export default function Header() {
           <span  className={router.pathname === '/medicacion' ? 'active' : ''}>Medicación</span>
           </Link>
           <span>Perfil</span>
-        </nav>
+          <LogoutButton/>
+        </nav>     
       </header>
     );
   }
