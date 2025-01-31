@@ -20,7 +20,7 @@ export default function Header() {
         </div>
         <nav className="header-nav">
           <Link href="/diagnosticos" style={{ textDecoration: 'none', color: 'inherit' }} passHref>
-            <span className={router.pathname === '/diagnosticos' ? 'active' : 'header-nav-link'}>Diagnosticos</span>
+            <span className={router.pathname === '/diagnosticos' ? 'active' : 'header-nav-link'}>Diagnósticos</span>
           </Link>
           <Link href="/citas" style={{ textDecoration: 'none', color: 'inherit' }} passHref>
           <span className={isActive(['/citas', '/agenda']) ? 'active' : 'header-nav-link'}>Citas</span>
