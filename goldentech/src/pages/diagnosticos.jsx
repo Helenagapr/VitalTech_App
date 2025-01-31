@@ -1,138 +1,113 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/header/header";
 import Footer from "../components/footer/Footer";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { getEpisodiosMedicos } from "../utils/api/episodiosMedicos";
 
-const DIAGNOSTICOS = [
-    {nombre: "Rinitis alergica", fecha: "2023-10-10", centro: "Goldenfold", doctor: "Helena Garcia"},
-    {nombre: "Virus T", fecha: "2023-10-05", centro: "Vitaltech", doctor: "Yago Garcia"},
-    {nombre: "Covid 19", fecha: "2024-11-03", centro: "Goldenfold", doctor: ""},
-    {nombre: "Fractura muscular", fecha: "$2024-12-31", centro: "Vitaltech", doctor: "Fernando Lopez-Nuño"},
-    {nombre: "Gripe", fecha: "2025-01-01", centro: "Goldenfold", doctor: "Alejandro"},
-    {nombre: "Neumonia", fecha: "2025-01-12", centro: "Viatltech", doctor: "Eric"},
-    {nombre: "Lupus", fecha: "2025-01-03", centro: "Goldenfold", doctor: "Marc"}
-];
+const DNI_PACIENTE = "07495694V"; // Cambiado al DNI correcto
 
-function DiagnosisRow({diagnosis}){
+function DiagnosisRow({ diagnosis }) {
     return (
         <div className="diagnostico-row">
             <div className="diagnostico-info">
                 <div className="diagnostico-cell" style={{ fontWeight: 'bold' }}>
-                    {diagnosis.nombre}
+                    {diagnosis.motivo} {/* Mostrar el motivo del episodio */}
                 </div>
                 <div className="diagnostico-cell" style={{ color: 'grey', fontSize: '0.8em' }}>
-                    {diagnosis.fecha}
+                    {diagnosis.dataObertura} {/* Fecha de apertura */}
                 </div>
                 <div className="diagnostico-cell" style={{ fontSize: '0.8em' }}>
-                    Centro: {diagnosis.centro}
+                    Estado: {diagnosis.estat} {/* Estado del episodio */}
                 </div>
             </div>
             <div className="diagnostico-button-cell">
                 <button>Ver detalles</button>
             </div>
         </div>
-    )
+    );
 }
 
-
-function DiagnosisList({ diagnosticos, filterName, filterDate, filterCentre }){
-    const rows = [];
-
-    diagnosticos.forEach((diagnosis) => {
-        if (diagnosis.nombre.toLowerCase().indexOf(filterName.toLowerCase()) === -1) {
-            return;
-        }
-        if (diagnosis.fecha.toLowerCase().indexOf(filterDate.toLowerCase()) === -1) {
-            return;
-        }
-        if (diagnosis.centro.toLowerCase().indexOf(filterCentre.toLowerCase()) === -1) {
-            return;
-        }
-        rows.push(
-            <DiagnosisRow  diagnosis={diagnosis}
-            key={diagnosis.nombre}/>
-        )
-    })
+function DiagnosisList({ diagnosticos, filterName, filterDate, filterCentre }) {
+    const filteredDiagnosticos = diagnosticos.filter((diagnosis) =>
+        diagnosis.motivo.toLowerCase().includes(filterName.toLowerCase()) &&
+        diagnosis.dataObertura.includes(filterDate) &&
+        diagnosis.estat.toLowerCase().includes(filterCentre.toLowerCase()) // Aquí usamos el estado en vez de "centro"
+    );
 
     return (
         <div className="diagnostico-table">
-            {rows}
+            {filteredDiagnosticos.map((diagnosis) => (
+                <DiagnosisRow key={diagnosis.id} diagnosis={diagnosis} />
+            ))}
         </div>
-    )
+    );
 }
 
-function DiagnosisFilter({filterName, setFilterName, filterDate, setFilterDate, filterCentre, setFilterCentre}) {
-    
-    const clearInput = (setter) => {
-        setter('');
-    };
-
+function DiagnosisFilter({ filterName, setFilterName, filterDate, setFilterDate, filterCentre, setFilterCentre }) {
     return (
         <div className="diagnostico-searchbox">
             <form>
                 <div className="diagnostico-filterbox">
                     <h1 style={{ fontWeight: 'bold', fontSize: '1.2em' }}>Filtrar</h1>
-                    <label style={{ fontSize: '0.9em' }}>Nombre</label>
-                    <div className="diagnostico-input-wrapper">
-                        <input className="diagnostico-input" type="text" value={filterName} placeholder="Selecciona el nombre"
-                        onChange={(e) => setFilterName(e.target.value)}/>
-                        {filterName && (
-                            <button className="diagnostico-clear-button" onClick={() => clearInput(setFilterName)}>
-                                <FontAwesomeIcon icon={faTimesCircle} />
-                            </button>
-                        )}
-                    </div>
-
-                    <label style={{ fontSize: '0.9em' }}>Fecha</label>
-                    <div className="diagnostico-input-wrapper">
-                        <input className="diagnostico-input" type="text" value={filterDate} placeholder="Selecciona una fecha"
-                        onChange={(e) => setFilterDate(e.target.value)}/>
-                        {filterDate && (
-                            <button className="diagnostico-clear-button" onClick={() => clearInput(setFilterDate)}>
-                                <FontAwesomeIcon icon={faTimesCircle} />
-                            </button>
-                        )}
-                    </div>
-
-                    <label style={{ fontSize: '0.9em' }}>Centro</label>
-                    <div className="diagnostico-input-wrapper">
-                        <input className="diagnostico-input" type="text" value={filterCentre} placeholder="Selecciona un centro"
-                        onChange={(e) => setFilterCentre(e.target.value)}/>
-                        {filterCentre && (
-                            <button className="diagnostico-clear-button" onClick={() => clearInput(setFilterCentre)}>
-                                <FontAwesomeIcon icon={faTimesCircle} />
-                            </button>
-                        )}
-                    </div>
-                    
+                    <label style={{ fontSize: '0.9em' }}>Motivo</label>
+                    <input
+                        className="diagnostico-input"
+                        type="text"
+                        value={filterName}
+                        placeholder="Filtrar por motivo"
+                        onChange={(e) => setFilterName(e.target.value)}
+                    />
+                    <label style={{ fontSize: '0.9em' }}>Fecha de apertura</label>
+                    <input
+                        className="diagnostico-input"
+                        type="text"
+                        value={filterDate}
+                        placeholder="Filtrar por fecha"
+                        onChange={(e) => setFilterDate(e.target.value)}
+                    />
+                    <label style={{ fontSize: '0.9em' }}>Estado</label>
+                    <input
+                        className="diagnostico-input"
+                        type="text"
+                        value={filterCentre}
+                        placeholder="Filtrar por estado"
+                        onChange={(e) => setFilterCentre(e.target.value)}
+                    />
                 </div>
             </form>
         </div>
-        
-    )
+    );
 }
 
-export default function Page(){
+export default function Page() {
     const [filterName, setFilterName] = useState('');
     const [filterDate, setFilterDate] = useState('');
     const [filterCentre, setFilterCentre] = useState('');
+    const [diagnosticos, setDiagnosticos] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const episodios = await getEpisodiosMedicos();
+                // Filtrar solo los episodios del paciente con el DNI correcto
+                const diagnosticosPaciente = episodios.filter(ep => ep.dniPacient === DNI_PACIENTE);
+                setDiagnosticos(diagnosticosPaciente);
+            } catch (error) {
+                console.error("Error al obtener los episodios médicos:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <>
             <Header />
             <h1 className="diagnostico-title">Diagnósticos</h1>
             <div className="diagnostico-page">
-                <DiagnosisList diagnosticos={DIAGNOSTICOS} filterName={filterName} 
-                filterDate={filterDate}
-                filterCentre={filterCentre}/>
-                <DiagnosisFilter filterName={filterName} setFilterName={setFilterName}
-                filterDate={filterDate} setFilterDate={setFilterDate}
-                filterCentre={filterCentre} setFilterCentre={setFilterCentre}
-                />
+                <DiagnosisList diagnosticos={diagnosticos} filterName={filterName} filterDate={filterDate} filterCentre={filterCentre} />
+                <DiagnosisFilter filterName={filterName} setFilterName={setFilterName} filterDate={filterDate} setFilterDate={setFilterDate} filterCentre={filterCentre} setFilterCentre={setFilterCentre} />
             </div>
             <Footer />
         </>
-        
-    )
+    );
 }
