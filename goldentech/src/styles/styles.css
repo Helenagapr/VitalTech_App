@@ -75,12 +75,18 @@
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    align-self: center;
     font-size: 1rem;
     transition: color 0.3s ease;
   }
 
+  .header-nav a {
+    align-self: center;
+  }
+
   .header-nav .active {
     color: #3b83bd; /* Change this to the color you want for the active state */
+    align-self: center;
   }
 
 .diagnostico-title{
