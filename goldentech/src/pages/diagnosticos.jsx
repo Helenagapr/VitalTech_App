@@ -4,8 +4,6 @@ import Footer from "../components/footer/Footer";
 import { getEpisodiosMedicos } from "../utils/api/episodiosMedicos";
 import { useKeycloak } from "../../auth/provider/KeycloakProvider";
 
- // Cambiado al DNI correcto
-
 function DiagnosisRow({ diagnosis }) {
     return (
         <div className="diagnostico-row">
@@ -86,11 +84,14 @@ export default function Page() {
     const [diagnosticos, setDiagnosticos] = useState([]);
     const { user } = useKeycloak();
 
-    const DNI_PACIENTE = user?.dni;
+    const DNI_PACIENTE = user?.dni || null;
     console.log(DNI_PACIENTE)
     console.log(user)
 
     useEffect(() => {
+
+        if (!DNI_PACIENTE) return;
+        
         const fetchData = async () => {
             try {
                 const episodios = await getEpisodiosMedicos();
