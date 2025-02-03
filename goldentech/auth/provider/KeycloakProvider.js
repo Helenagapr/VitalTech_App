@@ -21,8 +21,10 @@ export const KeycloakProvider = ({ children }) => {
           if (keycloak && auth) {
             setUser({
               name: keycloak.tokenParsed?.username,
-              email: keycloak.tokenParsed?.email,
+              dni: keycloak.tokenParsed?.dni
+
             });
+            console.log(keycloak.tokenParsed)
           }
           setInitialized(true);
         })

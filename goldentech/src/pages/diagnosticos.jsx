@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import Header from "../components/header/header";
 import Footer from "../components/footer/Footer";
 import { getEpisodiosMedicos } from "../utils/api/episodiosMedicos";
+import { useKeycloak } from "../../auth/provider/KeycloakProvider";
 
-const DNI_PACIENTE = "07495694V"; // Cambiado al DNI correcto
+ // Cambiado al DNI correcto
 
 function DiagnosisRow({ diagnosis }) {
     return (
@@ -83,13 +84,18 @@ export default function Page() {
     const [filterDate, setFilterDate] = useState('');
     const [filterCentre, setFilterCentre] = useState('');
     const [diagnosticos, setDiagnosticos] = useState([]);
+    const { user } = useKeycloak();
+
+    const DNI_PACIENTE = user?.dni;
+    console.log(DNI_PACIENTE)
+    console.log(user)
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const episodios = await getEpisodiosMedicos();
                 // Filtrar solo los episodios del paciente con el DNI correcto
-                const diagnosticosPaciente = episodios.filter(ep => ep.dniPacient === DNI_PACIENTE);
+                const diagnosticosPaciente = episodios.filter(ep => ep.dniPacient == DNI_PACIENTE);
                 setDiagnosticos(diagnosticosPaciente);
             } catch (error) {
                 console.error("Error al obtener los episodios médicos:", error);
