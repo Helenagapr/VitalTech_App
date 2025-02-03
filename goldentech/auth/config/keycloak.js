@@ -18,13 +18,13 @@ export const initKeycloak = () => {
   if (!isInitialized && keycloak) {
     isInitialized = true;
     return keycloak
-      .init({ onLoad:  "check-sso", checkLoginIframe: false })
-      .then(authenticated => authenticated)
-      .catch(err => {
-        isInitialized = false;
-        console.error('Failed to initialize Keycloak', err);
-        throw err;
-      });
+    .init({ onLoad: "check-sso", checkLoginIframe: false }) 
+    .then(authenticated => authenticated)
+    .catch(err => {
+      isInitialized = false;
+      console.error('Failed to initialize Keycloak', err);
+      throw err;
+    });
   }
   return Promise.resolve(keycloak?.authenticated ?? false);
 };

@@ -4,6 +4,7 @@ import Footer from "../components/footer/Footer";
 import { getEpisodiosMedicos } from "../utils/api/episodiosMedicos";
 import { useKeycloak } from "../../auth/provider/KeycloakProvider";
 
+
 function DiagnosisRow({ diagnosis }) {
     return (
         <div className="diagnostico-row">
@@ -89,22 +90,22 @@ export default function Page() {
     console.log(user)
 
     useEffect(() => {
-
-        if (!DNI_PACIENTE) return;
-        
-        const fetchData = async () => {
-            try {
-                const episodios = await getEpisodiosMedicos();
-                // Filtrar solo los episodios del paciente con el DNI correcto
-                const diagnosticosPaciente = episodios.filter(ep => ep.dniPacient == DNI_PACIENTE);
-                setDiagnosticos(diagnosticosPaciente);
-            } catch (error) {
-                console.error("Error al obtener los episodios médicos:", error);
-            }
-        };
-
-        fetchData();
-    }, []);
+        if (user?.dni) {
+            const fetchData = async () => {
+                try {
+                    const episodios = await getEpisodiosMedicos();
+                    // Filtrar solo los episodios del paciente con el DNI correcto
+                    const diagnosticosPaciente = episodios.filter(ep => ep.dniPacient === user.dni);
+                    setDiagnosticos(diagnosticosPaciente);
+                } catch (error) {
+                    console.error("Error al obtener los episodios médicos:", error);
+                }
+            };
+    
+            fetchData();
+        }
+    }, [user?.dni]);  // Se ejecutará solo cuando el 'dni' de 'user' cambie
+    
 
     return (
         <>

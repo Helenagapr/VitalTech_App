@@ -13,8 +13,10 @@ export const KeycloakProvider = ({ children }) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
 
+  const [keycloakInitialized, setKeycloakInitialized] = useState(false);
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !keycloakInitialized) {
       initKeycloak()
         .then(auth => {
           setAuthenticated(auth);
@@ -22,19 +24,18 @@ export const KeycloakProvider = ({ children }) => {
             setUser({
               name: keycloak.tokenParsed?.username,
               dni: keycloak.tokenParsed?.dni
-
             });
-            console.log(keycloak.tokenParsed)
           }
           setInitialized(true);
+          setKeycloakInitialized(true); // Marca como inicializado para evitar reinicializaciones
         })
         .catch(err => console.error('Failed to initialize Keycloak', err));
     }
-  }, []);
+  }, [keycloakInitialized]); // Solo se ejecuta si keycloakInitialized cambia
 
   return (
     <KeycloakContext.Provider value={{ initialized, authenticated, user, logout }}>
-      {children}
+      {initialized && children} {/* Solo renderiza los hijos cuando Keycloak esté inicializado */}
     </KeycloakContext.Provider>
   );
 };
