@@ -18,7 +18,7 @@ export const initKeycloak = () => {
   if (!isInitialized && keycloak) {
     isInitialized = true;
     return keycloak
-    .init({ onLoad: "check-sso", checkLoginIframe: false }) 
+    .init({ onLoad: "login-required", checkLoginIframe: false }) 
     .then(authenticated => authenticated)
     .catch(err => {
       isInitialized = false;
