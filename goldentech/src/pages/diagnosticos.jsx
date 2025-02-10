@@ -2,26 +2,45 @@ import { useState, useEffect } from "react";
 import Header from "../components/header/header";
 import Footer from "../components/footer/Footer";
 import { getEpisodiosMedicos } from "../utils/api/episodiosMedicos";
+import { getPruebasByDni } from "../utils/api/pruebasDiagnosticas"; // Nueva importación para obtener las pruebas diagnósticas
 import { useKeycloak } from "../../auth/provider/KeycloakProvider";
-
+import React from 'react';
+import Popup from 'reactjs-popup';
+import DiagnosisPopup from "../components/popups/popup-diagnosticos/popupDiagnosticos";
+import 'reactjs-popup/dist/index.css';
 
 function DiagnosisRow({ diagnosis }) {
+    const [open, setOpen] = useState(false); //para manejar el popup, concretamente si está abierto o cerrado
+    const [pruebas, setPruebas] = useState([]); // Estado para almacenar las pruebas diagnósticas asociadas
+
+    useEffect(() => {
+        if (open) { 
+            // Las pruebas diagnósticas ya vienen dentro del objeto diagnosis
+            setPruebas(diagnosis.pruebasDiagnosticas || []);
+        }
+    }, [open, diagnosis.pruebasDiagnosticas]);
+    
+
     return (
         <div className="diagnostico-row">
             <div className="diagnostico-info">
                 <div className="diagnostico-cell" style={{ fontWeight: 'bold' }}>
-                    {diagnosis.motivo} {/* Mostrar el motivo del episodio */}
+                    {diagnosis.motivo} 
                 </div>
                 <div className="diagnostico-cell" style={{ color: 'grey', fontSize: '0.8em' }}>
-                    {diagnosis.dataObertura} {/* Fecha de apertura */}
+                    {diagnosis.dataObertura} 
                 </div>
                 <div className="diagnostico-cell" style={{ fontSize: '0.8em' }}>
-                    Estado: {diagnosis.estat} {/* Estado del episodio */}
+                    Estado: {diagnosis.estat} 
                 </div>
             </div>
             <div className="diagnostico-button-cell">
-                <button>Ver detalles</button>
+                {/*botón para abrir el popup*/}
+                <button onClick={() => setOpen(true)}>Ver detalles</button> 
             </div>
+
+            {/* Esto llama al componente popup y le pasa las pruebas obtenidas */}
+            <DiagnosisPopup open={open} onClose={() => setOpen(false)} pruebas={pruebas} />
         </div>
     );
 }
@@ -86,8 +105,8 @@ export default function Page() {
     const { user } = useKeycloak();
 
     const DNI_PACIENTE = user?.dni || null;
-    console.log(DNI_PACIENTE)
-    console.log(user)
+    console.log(DNI_PACIENTE);
+    console.log(user);
 
     useEffect(() => {
         if (user?.dni) {
@@ -104,9 +123,9 @@ export default function Page() {
     
             fetchData();
         }
-    }, [user?.dni]);  // Se ejecutará solo cuando el 'dni' de 'user' cambie
+        // Se ejecutará solo cuando el dni de "user" cambie:
+    }, [user?.dni]); 
     
-
     return (
         <>
             <Header />

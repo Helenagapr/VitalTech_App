@@ -1,3 +1,4 @@
+
 const API_URL = 'https://localhost:7200/api';
 
 export const getEpisodiosMedicos = async () => {

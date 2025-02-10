@@ -1,3 +1,4 @@
+
 const API_URL = 'https://localhost:7200/api';
 
 export const getPruebasByDni = async (dniPacient) => {
@@ -14,4 +15,4 @@ export const getPruebasByDni = async (dniPacient) => {
         console.error(error);
         return [];
     }
-};
+}; 

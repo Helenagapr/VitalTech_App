@@ -58,14 +58,14 @@ export default function MainContent() {
           />
         </Link>
 
-        <Link href="/pacientes" style={{ textDecoration: 'none', color: 'inherit' }}>
+        {/* <Link href="/pacientes" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Element
             title="testin"
             parraf="pa testear, wahahahaha"
             image="https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2022/10/1200/675/Crash-test-dummy-yellow-getty-10-22.jpg?ve=1&tl=1"
             alt="imagen de medicación"
           />
-        </Link>
+        </Link> */}
 
       </div>
       <Footer />
