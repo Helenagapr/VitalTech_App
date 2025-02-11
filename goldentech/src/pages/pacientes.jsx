@@ -1,3 +1,6 @@
+
+//TODO ESTO NO SE USA, era para testear fetches de la api
+
 import { useEffect, useState } from "react";
 import { fetchPacientById, fetchPacientes } from "../utils/api/pacientes"; 
 import Header from "../components/header/header";

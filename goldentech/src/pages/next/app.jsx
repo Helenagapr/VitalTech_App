@@ -7,3 +7,5 @@ export default function App() {
         </>        
     );
 }
+
+//App es el componente principal de la app. en él se incluye "main", que a su vez incluirá todo el contenido de la wep.

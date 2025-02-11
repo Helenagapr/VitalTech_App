@@ -1,8 +1,12 @@
+//
+
 import Link from 'next/link';
 import Footer from '../components/footer/Footer'
 import Header from '../components/header/header'
 import LogoutButton from '../components/logout/LogoutButton';
 
+
+//renderiza un título; no hace falta exportarlo porque solo se usará aquí
 function Presentation() {
   return (
     <div className="main-presentation">
@@ -15,6 +19,7 @@ function Presentation() {
   );
 }
 
+//"plantilla" para los elementos del main (diagnósticos, medicinas, etc). "Element" como nombre es una convención, se le puede llamar como sea:
 function Element(props) {
   return (
     <div className="main-element">
@@ -25,7 +30,6 @@ function Element(props) {
   );
 }
 
-
 export default function MainContent() {
 
   return (
@@ -34,6 +38,7 @@ export default function MainContent() {
       <Presentation />
       <div className="main-elements">
         <Link href="/diagnosticos" style={{ textDecoration: 'none', color: 'inherit' }}>
+          {/*aquí creamos un elemento usando el "molde" de arriba: */}
           <Element
             title="Diagnósticos"
             parraf="Accede a tus informes médicos y resultados de pruebas"
@@ -57,16 +62,6 @@ export default function MainContent() {
             alt="imagen de citas"
           />
         </Link>
-
-        {/* <Link href="/pacientes" style={{ textDecoration: 'none', color: 'inherit' }}>
-          <Element
-            title="testin"
-            parraf="pa testear, wahahahaha"
-            image="https://a57.foxnews.com/static.foxnews.com/foxnews.com/content/uploads/2022/10/1200/675/Crash-test-dummy-yellow-getty-10-22.jpg?ve=1&tl=1"
-            alt="imagen de medicación"
-          />
-        </Link> */}
-
       </div>
       <Footer />
     </main>
