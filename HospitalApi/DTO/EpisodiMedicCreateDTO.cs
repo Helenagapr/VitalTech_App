@@ -13,10 +13,10 @@ namespace HospitalApi.DTO
         public string Urgencia {get; set;} = string.Empty;
         [Required]
         [NotMapped]
-        [DNIrestriction]
+        //[DNIrestriction]
         public string DNIPacient { get; set; } = string.Empty;
         [NotMapped]
-        [DNIrestriction]
+        //[DNIrestriction]
         public string DNIMetge { get; set; } = string.Empty;
 
     }

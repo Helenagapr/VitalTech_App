@@ -6,11 +6,28 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HospitalApi.Migrations
 {
     /// <inheritdoc />
-    public partial class Actiu : Migration
+    public partial class nuevas_migraciones : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Cita",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Metge = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pacient = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Episodi = table.Column<int>(type: "int", nullable: false),
+                    Motiu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataCita = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cita", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Entitats",
                 columns: table => new
@@ -374,6 +391,12 @@ namespace HospitalApi.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cita_Id",
+                table: "Cita",
+                column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EpisodisMedics_MetgeId",
                 table: "EpisodisMedics",
                 column: "MetgeId");
@@ -494,6 +517,9 @@ namespace HospitalApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Administratiu");
+
+            migrationBuilder.DropTable(
+                name: "Cita");
 
             migrationBuilder.DropTable(
                 name: "Ingressos");

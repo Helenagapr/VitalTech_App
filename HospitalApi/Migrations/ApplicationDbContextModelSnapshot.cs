@@ -22,6 +22,40 @@ namespace HospitalApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("HospitalAPI.Models.Cita", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataCita")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Episodi")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Metge")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Motiu")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pacient")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("Cita");
+                });
+
             modelBuilder.Entity("HospitalAPI.Models.Entitat", b =>
                 {
                     b.Property<string>("Tablas")

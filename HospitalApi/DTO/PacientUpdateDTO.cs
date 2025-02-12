@@ -7,7 +7,7 @@ namespace HospitalApi.DTO
     public class PacientUpdateDTO
     {
 
-        [DNIrestriction]
+        //[DNIrestriction]
         public string DNI { get; set; } = string.Empty;
         [TarjetaSANITARIArestriction]
         public string NumSS { get; set; } = string.Empty;

@@ -13,6 +13,10 @@ namespace HospitalAPI
             CreateMap<Enfermer, EnfermerReadDTO>().ReverseMap();
             CreateMap<Enfermer, EnfermerUpdateDTO>().ReverseMap();
 
+            CreateMap<Cita, CitaCreateDTO> ().ReverseMap();
+            CreateMap<Cita, CitaReadDTO> ().ReverseMap();
+            CreateMap<Cita, CitaUpdateDTO> ().ReverseMap();
+
             CreateMap<PruebasDiagnosticas, PruebaDiagnosticaCreateDTO>().ReverseMap();
             CreateMap<PruebasDiagnosticas, PruebaDiagnosticaReadDTO>().ReverseMap();
             CreateMap<PruebasDiagnosticas, PruebaDiagnosticaReferenceDTO>().ReverseMap();

@@ -299,20 +299,39 @@ INSERT INTO Entitats(Tablas) VALUES ('Ingrés');
 INSERT INTO Entitats(Tablas) VALUES ('Episodi Medic');
 INSERT INTO Entitats(Tablas) VALUES ('Pruebas Diagnosticas');
 INSERT INTO Entitats(Tablas) VALUES ('Pacient');
+INSERT INTO Entitats(Tablas)  VALUES('Cita');
 
 -- Episodis medics
 INSERT INTO EpisodisMedics (DataObertura, DataTancament, Motivo, Urgencia, Recepta, Estat, PacientId, MetgeId) VALUES ('2024-11-05', NULL, 'Dolor abdominal', 5, 'Ibuprofeno 400mg', 'Actiu', 6, 3);
 INSERT INTO EpisodisMedics (DataObertura, DataTancament, Motivo, Urgencia, Recepta, Estat, PacientId, MetgeId) VALUES ('2024-11-01', NULL, 'Fiebre alta', 3, NULL, 'Actiu', 2, 3);
-INSERT INTO EpisodisMedics (DataObertura, DataTancament, Motivo, Urgencia, Recepta, Estat, PacientId, MetgeId) VALUES ('2024-09-15', '2024-09-20', 2, 1, 'Paracetamol 1000mg', 'Tancat', 7, 9);
+
+INSERT INTO EpisodisMedics (DataObertura, DataTancament, Motivo, Urgencia, Recepta, Estat, PacientId, MetgeId) 
+VALUES ('2024-09-15', '2024-09-20', 'Dolores varios', 1, 'Paracetamol 1000mg', 'Tancat', 7, 9);
+
+INSERT INTO EpisodisMedics (DataObertura, DataTancament, Motivo, Urgencia, Recepta, Estat, PacientId, MetgeId) 
+VALUES ('2024-09-16', '2024-09-22', 'Dolor intenso', 1, 'tiritas', 'En curs', 7, 9);
 
 -- Ingressos 
 INSERT INTO Ingressos (DataEntrada, DataSortida, EpisodiMedicId, LlitId) VALUES ('2024-11-01', NULL, 2, 1);
 
-
-
 -- Pruebas diagnosticas
-INSERT INTO PruebasDiagnosticas ( MetgeId, EnfermerId, EpisodiMedicId, Dolencia, Pruebas,Resultados,Correcta ) VALUES ( 3, 4, 2, 'Dolor de pie','Radiografia Pie','Pie jodidisimo',1);
+INSERT INTO PruebasDiagnosticas ( MetgeId, EnfermerId, EpisodiMedicId, Dolencia, Pruebas,Resultados, Correcta ) 
+VALUES ( 3, 4, 3, 'Dolor en zona abdomen','Radiografia abdomen','abdomen dañado',1);
 
+INSERT INTO PruebasDiagnosticas ( MetgeId, EnfermerId, EpisodiMedicId, Dolencia, Pruebas,Resultados, Correcta ) 
+VALUES ( 3, 4, 3, 'Dolor de narizota','Radiografia nariz','nariz dañada',1);
+
+INSERT INTO PruebasDiagnosticas ( MetgeId, EnfermerId, EpisodiMedicId, Dolencia, Pruebas,Resultados, Correcta ) 
+VALUES ( 3, 4, 4, 'Dolor de alma','Radiografia alma','alma dañada',1);
+
+INSERT INTO PruebasDiagnosticas ( MetgeId, EnfermerId, EpisodiMedicId, Dolencia, Pruebas,Resultados, Correcta ) 
+VALUES ( 3, 4, 4, 'Dolor de pie','Radiografia pie','pie dañado',2);
+
+INSERT INTO PruebasDiagnosticas ( MetgeId, EnfermerId, EpisodiMedicId, Dolencia, Pruebas,Resultados, Correcta ) 
+VALUES ( 3, 4, 4, 'Fiebre','Toma de temperatura','fiebre',2);
+
+-- citas
+INSERT INTO Cita (Metge, Pacient, Episodi, Motiu, DataCita) VALUES ('55555555E', '98454420E', 2, 'dolor de narizota', '2024-11-01' );
 
 -- Permis
 INSERT INTO Permisos (Accio) VALUES ('C');

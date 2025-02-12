@@ -9,7 +9,6 @@ namespace HospitalAPI.DTO
     public string Nom {get; set;} = string.Empty;
     public string Telefon { get; set; } = string.Empty;
     public int UsuariId { get; set; }
-
     public string Prioridad { get; set; } = string.Empty;
     }
 }

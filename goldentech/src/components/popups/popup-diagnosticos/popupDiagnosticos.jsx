@@ -2,7 +2,7 @@ import Popup from "reactjs-popup";
 import { useEffect, useState } from "react";
 import styles from "../../../styles/components/popupDiagnosticos.module.css";
 
-//define 1 componente que recibe 3 props: un boleano que indica si el popup está abierto o no, una func. para cerrrarlo y 1 array
+//define 1 componente que recibe 3 props: un boleano que indica si el popup está abierto o no, una func. para cerrarlo y 1 array
 //de pruebas diagnósticas:
 export default function DiagnosisPopup({ open, onClose, pruebas }) {
     return (

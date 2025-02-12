@@ -5,7 +5,7 @@ namespace HospitalApi.DTO
 {
     public class MetgeUpdateDTO
     {
-        [DNIrestriction]
+        //[DNIrestriction]
         public string DNI { get; set; } = string.Empty;
         [Required]
         public string Nom { get; set; } = string.Empty;

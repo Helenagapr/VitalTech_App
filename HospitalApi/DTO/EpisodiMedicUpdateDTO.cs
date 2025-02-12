@@ -23,11 +23,11 @@ namespace HospitalApi.DTO
 
 
         [NotMapped]
-        [DNIrestriction]
+        //[DNIrestriction]
         public string DNIPacient { get; set; } = string.Empty;
 
         [NotMapped]
-        [DNIrestriction]
+        //[DNIrestriction]
         public string DNIMetge { get; set; } = string.Empty;
 
     }

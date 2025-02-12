@@ -23,6 +23,7 @@ namespace HospitalApi.Data
         public DbSet<RolPermisEntitat> RolPermisEntitats { get; set; }
         public DbSet<Administratiu> Administratius { get; set; }
         public DbSet<Enfermer> Enfermer { get; set; }
+        public DbSet <Cita> Cita {get;set;}
         public DbSet<AdministradorSistema> AdministradorSistema { get; set; }
         public DbSet<Metge> Metges { get; set; }
         public object Personal { get; internal set; }
@@ -104,6 +105,10 @@ namespace HospitalApi.Data
 
             modelBuilder.Entity<Pacient>()
             .HasIndex(e => e.DNI)
+            .IsUnique();
+
+            modelBuilder.Entity<Cita>()
+            .HasIndex(e=>e.Id)
             .IsUnique();
 
             modelBuilder.Entity<Personal>()
