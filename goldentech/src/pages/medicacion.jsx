@@ -26,6 +26,7 @@ function MedicacionRow({medicacion, onSelect, isSelected}){
             <div className="agenda-button">
                 <IconButton 
                     sx={{
+                        
                         backgroundColor: 'primary.main',
                         color: 'white',
                         '&:hover': {
@@ -78,7 +79,7 @@ export default function MedicationPage(){
     return (
         <>
             <Header />
-            <h1 className={styles.agendatitle}>Agenda</h1>
+            <h1 className={styles.agendatitle}>Medicación recetada</h1>
             <div className="agenda-container">
                 <ListaMedicacion medicaciones={medicaciones} onSelect={(medicacion) => setSelectedMedicacion(medicacion)} selectedMedicacion={selectedMedicacion}/>
                 {selectedMedicacion && (
@@ -95,10 +96,7 @@ export default function MedicationPage(){
                             </IconButton>
                         </div>
                         <Typography variant="body1"><strong>Fecha Caducidad:</strong> {selectedMedicacion.caducidadPrescripcion}</Typography>
-                        <Typography variant="body1"><strong>Dosis:</strong> {selectedMedicacion.dosis}</Typography>
                         <Typography variant="body1"><strong>Doctor:</strong> {selectedMedicacion.doctorRecetado}</Typography>
-                        <button className={styles.button_cell} onClick={handleCancelMedicacion}>Cancelar medicacion</button>
-                        <button className={styles.button_cell} onClick={handleCancelMedicacion}>Aplazar caducidad</button>
                     </Box>
                 )}
             </div>

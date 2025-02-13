@@ -13,8 +13,11 @@ export default function DiagnosisPopup({ open, onClose, pruebas }) {
                 {pruebas && pruebas.length > 0 ? (
                     pruebas.map((prueba, index) => (
                         <div key={index} className={styles.popupItem}>
+                            <p><strong>ID pruebas:</strong> {prueba.id || "No disponible"}</p>
+                            <p><strong>ID episodio médico de procedencia:</strong> {prueba.episodiMedicId || "No disponible"}</p>
                             <p><strong>Dolencia:</strong> {prueba.dolencia || "No disponible"}</p>
-                            <p><strong>ID de episodio médico:</strong> {prueba.episodiMedicId || "No disponible"}</p>
+                            <p><strong>Pruebas realizadas:</strong> {prueba.pruebas || "No disponible"}</p>
+                            
                         </div>
                     ))
                 ) : (

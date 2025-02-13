@@ -38,13 +38,19 @@ function DiagnosisRow({ diagnosis }) {
                 <div className="diagnostico-cell" style={{ color: 'grey', fontSize: '0.8em' }}>
                     Fecha apertura: {diagnosis.dataObertura} 
                 </div>
+                <div className="diagnostico-cell" style={{ color: 'grey', fontSize: '0.8em' }}>
+                    Fecha cierre: {diagnosis.dataTancament} 
+                </div>
+                <div className="diagnostico-cell" style={{ color: 'grey', fontSize: '0.8em' }}>
+                    Receta: {diagnosis.recepta} 
+                </div>
                 <div className="diagnostico-cell" style={{ fontSize: '0.8em' }}>
                     Estado: {diagnosis.estat} 
                 </div>
             </div>
             <div className="diagnostico-button-cell">
                 {/*botón para abrir el popup*/}
-                <button onClick={() => setOpen(true)}>Ver detalles</button> 
+                <button onClick={() => setOpen(true)}>Ver pruebas</button> 
             </div>
 
             {/*esto llama al componente popup y le pasa las pruebas obtenidas. además, también recibe como props

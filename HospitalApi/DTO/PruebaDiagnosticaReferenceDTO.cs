@@ -12,6 +12,7 @@ namespace HospitalApi.DTO
         public int MetgeId { get; set; }
         [Required]
         public int EnfermerId { get; set; }
+            public string? Pruebas {get;set;}
         [Required]
         public int EpisodiMedicId { get; set; }
         [Required]
