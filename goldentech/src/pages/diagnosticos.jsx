@@ -80,8 +80,8 @@ function DiagnosisList({ diagnosticos, filterName, filterDate, filterCentre }) {
     );
 }
 
-//renderiza la caja de búsqueda. cada vez que el user escribe, actualiza el estado. 
-//ejemplo de flujo: 1 El usuario escribe "dolor" en el campo Motivo de DiagnosisFilter.
+//renderiza la caja de búsqueda. cada vez que el user escribe, actualiza el estado. ejemplo de flujo: 
+//1 El usuario escribe "dolor" en el campo Motivo de DiagnosisFilter.
 //2️ El estado filterName se actualiza en Page (ver abajo)
 //3️ El componente DiagnosisList recibe el valor actualizado de filterName y filtra los diagnósticos.
 //4 Solo se muestran los diagnósticos cuyo motivo incluya "dolor"
