@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Header from "../components/header/header";
 import Footer from "../components/footer/Footer";
-import { getEpisodiosMedicos } from "../utils/api/episodiosMedicos"; // Importa la función para obtener los episodios médicos
-import { useKeycloak } from "../../auth/provider/KeycloakProvider"; // Importa useKeycloak
+import { getEpisodiosMedicos } from "../utils/api/episodiosMedicos"; 
+import { useKeycloak } from "../../auth/provider/KeycloakProvider";
 import React from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -24,7 +24,7 @@ function MedicacionRow({ medicacion, onSelect, isSelected }) {
           {medicacion.dataObertura}
         </p>
         <p style={{ margin: "0px", fontWeight: 'bold', fontFamily: "'Roboto', sans-serif", fontSize: '1.0em' }}>
-          {medicacion.recepta} {/* Muestra la receta */}
+          {medicacion.recepta} 
         </p>
       </div>
       <div className="agenda-button">
@@ -50,13 +50,14 @@ function MedicacionRow({ medicacion, onSelect, isSelected }) {
 export default function MedicationPage() {
   const [selectedMedicacion, setSelectedMedicacion] = useState(null);
   const [medicaciones, setMedicacion] = useState([]);
-  const { user } = useKeycloak(); // Obtiene el usuario desde Keycloak
+  //obtiene el usuario (paciente) desde keycloak:
+  const { user } = useKeycloak(); 
 
-  // Obtener el DNI del paciente logueado
+  //obtenemos el dni del paciente logueado:
   const DNI_PACIENTE = user?.dni || null;
 
   useEffect(() => {
-    // Solo se ejecuta si el usuario tiene DNI
+    //solo se ejecuta si el usuario tiene dni:
     if (DNI_PACIENTE) {
       const fetchData = async () => {
         try {
@@ -69,7 +70,8 @@ export default function MedicationPage() {
       };
       fetchData();
     }
-  }, [DNI_PACIENTE]); // El hook se ejecutará cada vez que cambie el DNI del usuario
+    //se ejecutará cada vez que cambie el dni del user:
+  }, [DNI_PACIENTE]); 
 
   const handleClose = () => {
     setSelectedMedicacion(null); // Cerrar la caja de información
@@ -85,7 +87,7 @@ export default function MedicationPage() {
       <Header />
       <h1 className={styles.agendatitle}>Medicación recetada</h1>
       <div className="agenda-container">
-        {/* Aquí pasamos las medicaciones obtenidas */}
+        {/* aquí pasamos las medicaciones obtenidas */}
         {medicaciones.map(medicacion => (
           <MedicacionRow
             key={medicacion.id}
@@ -102,7 +104,8 @@ export default function MedicationPage() {
                 sx={{
                   color: 'grey',
                 }}
-                onClick={handleClose} // Cerrar el popup
+                //cuando se clica, se cierra el popup:
+                onClick={handleClose}
               >
                 <CloseIcon />
               </IconButton>

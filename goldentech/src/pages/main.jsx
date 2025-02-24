@@ -13,7 +13,7 @@ function Presentation() {
       <h1>Bienvenido a Goldentech</h1>
       <p className="main-p">
         Tu salud es nuestra prioridad. Descubre nuestra amplia gama de servicios
-        diseñados para mantenerlo informado y saludable.
+        diseñados para mantenerte informado y saludable.
       </p>
     </div>
   );
