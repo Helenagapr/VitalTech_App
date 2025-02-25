@@ -1,10 +1,9 @@
-//
+
 
 import Link from 'next/link';
 import Footer from '../components/footer/Footer'
 import Header from '../components/header/header'
 import LogoutButton from '../components/logout/LogoutButton';
-
 
 //renderiza un título; no hace falta exportarlo porque solo se usará aquí
 function Presentation() {

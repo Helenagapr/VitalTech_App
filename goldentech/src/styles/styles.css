@@ -431,6 +431,8 @@
   border: 2px solid #3b83bd; /* Cambia el color y grosor del borde */
   border-radius: 10px; /* Redondea las esquinas */
   background-color: #f9f9f9; /* Cambia el fondo */
+  padding:10px;
+  margin:10px;
   outline: none; /* Quita el borde azul de enfoque */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil */
   transition: border-color 0.3s, box-shadow 0.3s; /* Suaviza las transiciones */

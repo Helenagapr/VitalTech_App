@@ -74,11 +74,11 @@ export default function MedicationPage() {
   }, [DNI_PACIENTE]); 
 
   const handleClose = () => {
-    setSelectedMedicacion(null); // Cerrar la caja de información
+    setSelectedMedicacion(null); 
   };
 
   const handleCancelMedicacion = () => {
-    setMedicacion(medicaciones.filter(medicacion => medicacion !== selectedMedicacion)); // Elimina la medicación seleccionada
+    setMedicacion(medicaciones.filter(medicacion => medicacion !== selectedMedicacion)); 
     setSelectedMedicacion(null);
   };
 
